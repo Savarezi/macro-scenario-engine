@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
+from mangum import Mangum  # <-- 1. ADICIONADO PARA A VERCEL
 
 # Carrega as variáveis do arquivo .env
 load_dotenv(dotenv_path="./.env")
