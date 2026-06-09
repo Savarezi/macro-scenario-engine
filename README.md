@@ -9,7 +9,8 @@ O sistema recebe um cenário econômico enviado pelo usuário (ex: "dólar em al
 ## 📸 Demonstração do Projeto
 
 ### ⚙️ Fluxo de Construção no Typebot
-<img width="1036" height="540" alt="image" src="https://github.com/user-attachments/assets/a193dcff-a289-4088-a415-dd68a36b8ffb" />
+<img width="1131" height="544" alt="image" src="https://github.com/user-attachments/assets/6cac4554-54c7-4d92-b3fb-05c629ef3e4c" />
+
 
 
 
