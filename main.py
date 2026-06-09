@@ -1,23 +1,21 @@
 import os
-import httpx  # <-- 1. IMPORTANTE: Adicionamos o httpx
 from fastapi import FastAPI
 from pydantic import BaseModel
 from groq import Groq
 from dotenv import load_dotenv
 from mangum import Mangum
 
-# Carrega as variáveis do arquivo .env (localmente)
-load_dotenv(dotenv_path="./.env")
+# Tenta carregar o arquivo .env apenas se ele existir localmente (Codespaces)
+if os.path.exists("./.env"):
+    load_dotenv(dotenv_path="./.env")
 
 app = FastAPI()
 
-# <-- 2. CORREÇÃO CRÍTICA PARA A VERCEL: 
-# Criamos um cliente HTTP que fecha a conexão após o uso, evitando o Connection Error
-http_client = httpx.Client(transport=httpx.HTTPTransport(local_address="0.0.0.0"))
-client = Groq(
-    api_key=os.getenv("GROQ_API_KEY"),
-    http_client=http_client  # Passamos o cliente customizado para a Groq
-)
+# Pega a chave direto do ambiente do servidor (Vercel ou Codespaces)
+api_key = os.environ.get("GROQ_API_KEY")
+
+# Inicializa o cliente padrão da Groq sem forçar o httpx antigo
+client = Groq(api_key=api_key)
 
 handler = Mangum(app)
 
@@ -27,6 +25,13 @@ class CenarioInput(BaseModel):
 @app.post("/analisar")
 def analisar_cenario(dados: CenarioInput):
     texto_recebido = dados.cenario
+    
+    # Validação de segurança: se a chave sumir por algum motivo, avisa no erro
+    if not os.environ.get("GROQ_API_KEY"):
+        return {
+            "status": "erro",
+            "mensagem": "Erro interno: A chave GROQ_API_KEY não foi encontrada nas variáveis da Vercel."
+        }
     
     prompt = f"""
     Você é um especialista em análise macroeconômica para o mercado financeiro brasileiro.
