@@ -1,6 +1,5 @@
 fastapi
 pydantic
-groq
 python-dotenv
 mangum
-httpx
+requests

@@ -1,22 +1,14 @@
 import os
+import requests  # <-- Mudamos para requisição HTTP direta, que a Vercel aceita sem travar
 from fastapi import FastAPI
 from pydantic import BaseModel
-from groq import Groq
 from dotenv import load_dotenv
 from mangum import Mangum
 
-# Tenta carregar o arquivo .env apenas se ele existir localmente (Codespaces)
 if os.path.exists("./.env"):
     load_dotenv(dotenv_path="./.env")
 
 app = FastAPI()
-
-# Pega a chave direto do ambiente do servidor (Vercel ou Codespaces)
-api_key = os.environ.get("GROQ_API_KEY")
-
-# Inicializa o cliente padrão da Groq sem forçar o httpx antigo
-client = Groq(api_key=api_key)
-
 handler = Mangum(app)
 
 class CenarioInput(BaseModel):
@@ -25,9 +17,9 @@ class CenarioInput(BaseModel):
 @app.post("/analisar")
 def analisar_cenario(dados: CenarioInput):
     texto_recebido = dados.cenario
+    api_key = os.environ.get("GROQ_API_KEY")
     
-    # Validação de segurança: se a chave sumir por algum motivo, avisa no erro
-    if not os.environ.get("GROQ_API_KEY"):
+    if not api_key:
         return {
             "status": "erro",
             "mensagem": "Erro interno: A chave GROQ_API_KEY não foi encontrada nas variáveis da Vercel."
@@ -42,16 +34,27 @@ def analisar_cenario(dados: CenarioInput):
     Traga uma resposta direta, sem introduções longas, ideal para leitura em um chat de suporte.
     """
     
+    # Conversando diretamente com a API da Groq via HTTP puro
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json"
+    }
+    payload = {
+        "model": "llama-3.3-70b-versatile",
+        "messages": [{"role": "user", "content": prompt}],
+        "temperature": 0.7
+    }
+    
     try:
-        completion = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
-            messages=[
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        analise_real = completion.choices[0].message.content
+        response = requests.post(url, json=payload, headers=headers, timeout=8)
         
+        if response.status_code == 200:
+            dados_resposta = response.json()
+            analise_real = dados_resposta["choices"][0]["message"]["content"]
+        else:
+            analise_real = f"Desculpe, a Groq retornou um erro código {response.status_code}: {response.text}"
+            
     except Exception as e:
         analise_real = f"Desculpe, tive um problema ao conectar com o motor de análise. Erro: {str(e)}"
 
