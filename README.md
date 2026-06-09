@@ -9,10 +9,11 @@ O sistema recebe um cenário econômico enviado pelo usuário (ex: "dólar em al
 ## 📸 Demonstração do Projeto
 
 ### ⚙️ Fluxo de Construção no Typebot
-![Fluxo Estruturado no Typebot](Insira_o_link_da_imagem_do_seu_fluxo_aqui.png)
+![Fluxo Estruturado no Typebot](<img width="1165" height="537" alt="image" src="https://github.com/user-attachments/assets/eba278b1-62bc-4adb-8d7d-d6f3d036ce73" />
+)
 
 ### 🌐 Link do Chat
-[Clique aqui para acessar o Motor de Análise Macroeconômica](Insira_o_link_url_do_seu_chat_aqui)
+[Clique aqui para acessar o Motor de Análise Macroeconômica](https://typebot.co/macro-scenario-engine-ayae11f)
 
 ---
 
