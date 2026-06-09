@@ -63,3 +63,10 @@ O chat foi customizado utilizando CSS injetado nas configurações avançadas do
 *   **Fundo do Chat:** Azul Escuro Corporativo (`#0b1a24`)
 *   **Balões do Robô:** Fundo Branco Puro (`#ffffff`) com Fonte Escura (`#1a202c`) para máxima legibilidade.
 *   **Balões do Usuário:** Azul/Verde Piscina Vibrante (`#00b4d8`) com texto em branco, combinando com gráficos de alta de mercado.
+
+```
+---
+
+
+
+
