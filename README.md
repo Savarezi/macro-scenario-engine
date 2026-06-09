@@ -66,7 +66,11 @@ O chat foi customizado utilizando CSS injetado nas configurações avançadas do
 
 ```
 ---
+## Contato
 
+Desenvolvido por Patricia. Conecte-se comigo profissionalmente:
+
+* [LinkedIn](https://www.linkedin.com/in/savarezi/)
 
 
 
