@@ -66,6 +66,7 @@ Traga uma resposta direta, sem introduções longas, ideal para leitura em um ch
 - Sugerir setores favorecidos pela conjuntura.
 - Alertar sobre riscos e pontos de atenção.
 - Gerar respostas objetivas e de fácil leitura.
+<img width="685" height="366" alt="image" src="https://github.com/user-attachments/assets/d855e4d8-6e9e-4113-865a-b404e00edee8" />
 
 ---
 
