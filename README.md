@@ -1,5 +1,8 @@
 # 📊 Motor de Análise Macroeconômica — Typebot + FastAPI + Groq (Llama 3.3)
 
+<img width="671" height="311" alt="image" src="https://github.com/user-attachments/assets/97182659-4ac3-4492-8292-a09e4e26fe5d" />
+
+
 ## 📌 Visão Geral
 
 O **Motor de Análise Macroeconômica** é uma solução baseada em Inteligência Artificial desenvolvida para interpretar cenários econômicos e gerar recomendações estratégicas sobre setores e oportunidades de investimento na B3.
