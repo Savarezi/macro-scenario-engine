@@ -82,17 +82,13 @@ Traga uma resposta direta, sem introduções longas, ideal para leitura em um ch
 
 ## 📂 Estrutura do Projeto
 
-| Pasta/Arquivo | Descrição |
-|--------------|-----------|
-| `venv/` | Ambiente virtual Python |
-| `__pycache__/` | Cache de arquivos compilados |
-| `.gitignore` | Arquivos ignorados pelo Git |
-| `Documentacao_Macro_Scenario_Engine.pdf` | Documentação completa do projeto |
-| `README.md` | Guia de utilização e documentação |
-| `main.py` | Aplicação principal FastAPI |
-| `requirements.txt` | Dependências do projeto |
-| `vercel.json` | Configuração de deploy na Vercel |
+📁 Projeto
 
+- 📄 [`Documentacao_Macro_Scenario_Engine.pdf`](./Documentacao_Macro_Scenario_Engine.pdf)
+- 📄 [`README.md`](./README.md)
+- 📄 [`main.py`](./main.py)
+- 📄 [`requirements.txt`](./requirements.txt)
+- 📄 [`vercel.json`](./vercel.json)
 ---
 
 ## 🚀 Recursos Implementados
