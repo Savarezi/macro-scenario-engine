@@ -211,7 +211,7 @@ Recebe um cenário econômico e retorna uma análise estratégica.
 
 ## 👩‍💻 Desenvolvedora
 
-**Patricia Savarezi**
+**Patricia Oliveira**
 
 Analista e Desenvolvedora de Software.
 
