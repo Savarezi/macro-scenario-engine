@@ -1,77 +1,230 @@
-# 📊 Motor de Análise Macroeconômica — Integração Typebot + FastAPI + Groq (Llama 3.3)
+# 📊 Motor de Análise Macroeconômica — Typebot + FastAPI + Groq (Llama 3.3)
 
-Este repositório contém a documentação e os arquivos de configuração para o **Motor de Análise Macroeconômica**, uma solução inteligente desenvolvida para automatizar e enriquecer o atendimento ao cliente focado no mercado financeiro e na B3.
+## 📌 Visão Geral
 
-O sistema recebe um cenário econômico enviado pelo usuário (ex: "dólar em alta", "queda da Selic"), processa essa informação através de um modelo avançado de Inteligência Artificial e devolve uma recomendação estratégica humanizada e setorial direto no chat.
+O **Motor de Análise Macroeconômica** é uma solução baseada em Inteligência Artificial desenvolvida para interpretar cenários econômicos e gerar recomendações estratégicas sobre setores e oportunidades de investimento na B3.
+
+A aplicação integra **Typebot**, **FastAPI** e **Groq Cloud**, permitindo que usuários enviem cenários econômicos em linguagem natural e recebam análises rápidas, objetivas e humanizadas diretamente pelo chat.
 
 ---
 
 ## 📸 Demonstração do Projeto
 
-### ⚙️ Fluxo de Construção no Typebot
-<img width="1131" height="544" alt="image" src="https://github.com/user-attachments/assets/6cac4554-54c7-4d92-b3fb-05c629ef3e4c" />
+### ⚙️ Fluxo Construído no Typebot
 
+<img width="1131" height="544" alt="Fluxo Typebot" src="https://github.com/user-attachments/assets/6cac4554-54c7-4d92-b3fb-05c629ef3e4c" />
 
+### 🌐 Acesso ao Chat
 
-
-### 🌐 Link do Chat
-[Clique aqui para acessar o Motor de Análise Macroeconômica](https://typebot.co/macro-scenario-engine-ayae11f)
-
----
-
-## 🛠️ Tecnologias e Stack Utilizadas
-
-*   **Front-end / Interface:** [Typebot](https://typebot.io) — Construção da jornada do usuário, captura de dados personalizados (como o nome do usuário) e exibição das análises.
-*   **Back-end / API:** [FastAPI (Python)](https://fastapi.tiangolo.com) — Criação do endpoint seguro `/analisar` para receber os dados do Typebot e gerenciar as chamadas de IA.
-*   **Motor de IA:** [Groq Cloud API](https://groq.com) — Processamento de linguagem natural utilizando o modelo estável e ultraveloz **`llama-3.3-70b-versatile`**.
-*   **Estilização:** CSS Customizado para uma experiência de interface no modo escuro (*Dark Mode*), alinhada com a identidade visual de mercado corporativo e financeiro.
+🔗 https://typebot.co/macro-scenario-engine-ayae11f
 
 ---
 
-## 🧠 Recursos Implementados
+## 🏗️ Arquitetura da Solução
 
-1.  **Acolhimento Humanizado:** O bot inicia solicitando o nome do usuário, salvando-o dinamicamente em variáveis (`{nome}`) para personalizar todas as mensagens seguintes da conversa.
-2.  **Análise Macroeconômica em Tempo Real:** Conexão direta com o modelo Llama 3.3 via Groq, fornecendo insights detalhados sobre setores beneficiados (commodities, exportadoras) e setores que exigem cautela (varejo, empresas endividadas em moeda estrangeira).
-3.  **Tratamento de Erros Resiliente (`Try/Except`):** Caso ocorra qualquer instabilidade de conexão ou expiração de modelos, a API captura o erro amigavelmente e evita o travamento do fluxo do cliente.
-4.  **Interface Limpa:** Aplicação de CSS avançado para remover caixas duplicadas (*containers*) do Typebot, deixando os balões flutuantes, legíveis e com alto contraste.
-
----
-
-## 🚀 Como Executar o Back-end
-
-1.  **Instale as dependências necessárias:**
-```bash
-    pip install fastapi uvicorn groq pydantic
-    ```
-
-2.  **Configure sua Chave de API:**
-    No arquivo principal do servidor, substitua a variável correspondente pela sua credencial gerada no painel da Groq:
-```python
-    client = Groq(api_key="SUA_CHAVE_AQUI")
-    ```
-
-3.  **Inicie o servidor localmente:**
-```bash
-    uvicorn main:app --reload
-    ```
-    O servidor estará rodando e pronto para receber requisições HTTP POST do seu Typebot no endereço `http://127.0.0.1:8000/analisar`.
-
----
-
-## 🎨 Paleta de Cores Aplicada (CSS)
-
-O chat foi customizado utilizando CSS injetado nas configurações avançadas do Typebot, trazendo as seguintes especificações:
-*   **Fundo do Chat:** Azul Escuro Corporativo (`#0b1a24`)
-*   **Balões do Robô:** Fundo Branco Puro (`#ffffff`) com Fonte Escura (`#1a202c`) para máxima legibilidade.
-*   **Balões do Usuário:** Azul/Verde Piscina Vibrante (`#00b4d8`) com texto em branco, combinando com gráficos de alta de mercado.
-
+```text
+Usuário
+   ↓
+Typebot
+   ↓
+Webhook HTTP
+   ↓
+FastAPI
+   ↓
+Groq Cloud (Llama 3.3 70B)
+   ↓
+Análise Macroeconômica
+   ↓
+Resposta Personalizada
 ```
+
 ---
-## Contato
 
-Desenvolvido por Patricia. Conecte-se comigo profissionalmente:
+## 🧠 Prompt Utilizado
 
-* [LinkedIn](https://www.linkedin.com/in/savarezi/)
+O sistema utiliza o seguinte prompt para interpretar cenários econômicos e gerar recomendações:
 
+```python
+prompt = f"""
+Você é um especialista em análise macroeconômica para o mercado financeiro brasileiro.
 
+Analise o seguinte cenário enviado pelo usuário e traga uma recomendação estratégica clara, humanizada e direta de quais setores ou investimentos na B3 podem se beneficiar ou exigir cautela.
 
+Cenário: {texto_recebido}
+
+Traga uma resposta direta, sem introduções longas, ideal para leitura em um chat de suporte.
+"""
+```
+
+### Objetivos do Prompt
+
+- Interpretar cenários macroeconômicos.
+- Identificar oportunidades de investimento.
+- Sugerir setores favorecidos pela conjuntura.
+- Alertar sobre riscos e pontos de atenção.
+- Gerar respostas objetivas e de fácil leitura.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Finalidade |
+|------------|------------|
+| Typebot | Interface conversacional |
+| FastAPI | API REST para processamento |
+| Python | Lógica de negócio |
+| Groq Cloud | Infraestrutura de IA |
+| Llama 3.3 70B Versatile | Modelo de linguagem |
+| HTML/CSS | Customização visual |
+| JSON | Troca de dados entre sistemas |
+
+---
+
+## 📂 Estrutura do Projeto
+
+| Pasta/Arquivo | Descrição |
+|--------------|-----------|
+| `venv/` | Ambiente virtual Python |
+| `__pycache__/` | Cache de arquivos compilados |
+| `.gitignore` | Arquivos ignorados pelo Git |
+| `Documentacao_Macro_Scenario_Engine.pdf` | Documentação completa do projeto |
+| `README.md` | Guia de utilização e documentação |
+| `main.py` | Aplicação principal FastAPI |
+| `requirements.txt` | Dependências do projeto |
+| `vercel.json` | Configuração de deploy na Vercel |
+
+---
+
+## 🚀 Recursos Implementados
+
+### ✅ Atendimento Personalizado
+
+Solicita o nome do usuário e utiliza variáveis dinâmicas para personalizar toda a conversa.
+
+### ✅ Integração com Inteligência Artificial
+
+Conexão direta com o modelo Llama 3.3 hospedado na Groq Cloud.
+
+### ✅ Análise Macroeconômica
+
+Identificação automática de:
+
+- Setores beneficiados;
+- Setores com maior risco;
+- Possíveis impactos econômicos;
+- Oportunidades na B3.
+
+### ✅ Tratamento de Erros
+
+Implementação de blocos `try/except` para garantir estabilidade da aplicação.
+
+### ✅ Interface Moderna
+
+Customização completa do Typebot com visual Dark Mode inspirado em plataformas financeiras.
+
+---
+
+## ⚙️ Como Executar Localmente
+
+### 1. Clone o repositório
+
+```bash
+git clone https://github.com/seu-usuario/macro-scenario-engine.git
+```
+
+### 2. Acesse a pasta
+
+```bash
+cd macro-scenario-engine
+```
+
+### 3. Instale as dependências
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure sua chave Groq
+
+```python
+client = Groq(api_key="SUA_CHAVE_AQUI")
+```
+
+### 5. Execute a aplicação
+
+```bash
+uvicorn main:app --reload
+```
+
+Servidor disponível em:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 📡 Endpoint Disponível
+
+### POST /analisar
+
+Recebe um cenário econômico e retorna uma análise estratégica.
+
+### Exemplo de Entrada
+
+```json
+{
+  "texto": "Dólar em forte alta e expectativa de aumento da inflação."
+}
+```
+
+### Exemplo de Resposta
+
+```json
+{
+  "analise": "Exportadoras e empresas ligadas a commodities podem se beneficiar. Setores dependentes de importação exigem cautela."
+}
+```
+
+---
+
+## 🎨 Customização Visual
+
+### Paleta Utilizada
+
+| Elemento | Cor |
+|-----------|------|
+| Fundo Principal | #0b1a24 |
+| Balão do Bot | #ffffff |
+| Texto do Bot | #1a202c |
+| Balão do Usuário | #00b4d8 |
+| Texto do Usuário | #ffffff |
+
+---
+
+## 📈 Possíveis Evoluções
+
+- Integração com APIs de mercado em tempo real;
+- Histórico de consultas;
+- Dashboard analítico;
+- Recomendações por perfil de investidor;
+- Integração com dados da B3;
+- Geração de relatórios em PDF.
+
+---
+
+## 👩‍💻 Desenvolvedora
+
+**Patricia Savarezi**
+
+Analista e Desenvolvedora de Software.
+
+### LinkedIn
+
+https://www.linkedin.com/in/savarezi/
+
+---
+
+## 📄 Licença
+
+Projeto desenvolvido para fins educacionais, demonstração técnica e portfólio profissional.
